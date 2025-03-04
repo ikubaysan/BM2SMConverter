@@ -32,6 +32,7 @@ wheels/
 *.manifest
 *.spec
 *.exe
+*.dll
 
 # Installer logs
 pip-log.txt
@@ -101,3 +102,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+working/
