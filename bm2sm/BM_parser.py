@@ -148,8 +148,17 @@ class BMChartParser(object):
     @transform_args(..., ..., Segment)
     def _define_wav(self, value, wav_id):
         header = path.dirname(self.BM_file_path)
-        filename = path.splitext(path.basename(value))[0]
-        file_path = escape(path.join(header, filename))
+
+        # Join header with value to ensure subdirectories are accounted for
+        full_value_path = path.join(header, value)
+
+        # Extract filename without extension
+        filename = path.splitext(path.basename(full_value_path))[0]
+
+        # Reconstruct correct file path while preserving any subdirectory structure
+        file_path = escape(path.join(path.dirname(full_value_path), filename))
+
+        # Find matching audio files
         candidates = glob(file_path + '.*')
 
         if len(candidates) != 1:
